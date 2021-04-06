@@ -42,15 +42,6 @@ extern int ump_debug_level;
 
 #define DEBUG_ASSERT_POINTER(pointer) do  {if( (pointer)== NULL) MSG_ERR(("NULL pointer " #pointer)); } while(0)
 #define DEBUG_ASSERT(condition) do  {if(!(condition)) MSG_ERR(("ASSERT failed: " #condition)); } while(0)
-#else /* DEBUG */
-#define UMP_DEBUG_PRINT(args) do {} while(0)
-#define UMP_DEBUG_CODE(args)
-#define DBG_MSG(level,args) do {} while(0)
-#define DBG_MSG_IF(level,condition,args) do {} while(0)
-#define DBG_MSG_ELSE(level,args) do {} while(0)
-#define DEBUG_ASSERT(condition) do {} while(0)
-#define DEBUG_ASSERT_POINTER(pointer) do  {} while(0)
-#endif /* DEBUG */
 
 #define MSG_ERR(args) do{ /* args should be in brackets */ \
 		_mali_osk_dbgmsg("UMP: ERR: %s\n" ,__FILE__); \
@@ -63,6 +54,19 @@ extern int ump_debug_level;
 		_mali_osk_dbgmsg("UMP: "); \
 		_mali_osk_dbgmsg args; \
 	} while (0)
+
+#else /* DEBUG */
+#define UMP_DEBUG_PRINT(args) do {} while(0)
+#define UMP_DEBUG_CODE(args)
+#define DBG_MSG(level,args) do {} while(0)
+#define DBG_MSG_IF(level,condition,args) do {} while(0)
+#define DBG_MSG_ELSE(level,args) do {} while(0)
+#define DEBUG_ASSERT(condition) do {} while(0)
+#define DEBUG_ASSERT_POINTER(pointer) do  {} while(0)
+#define MSG_ERR(args) do {} while(0)
+#define MSG(args) do {} while(0)
+#endif /* DEBUG */
+
 
 
 
