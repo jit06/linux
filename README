@@ -1,3 +1,73 @@
+Custom odroid C1 & C0 kernel
+============================
+
+This is a linux kernel for Odroid C1 and C0, derived from hardkernel sources. I just modified some files to make it compiles (linaro).
+
+The objective is to get a kernel for one or few dedicated task on the C1, like emulation or music player that do not require any security (no network connection)
+I have stripped down somes features either to : speedup boot, free memory or try to get a little performance boost.
+
+Using this kernel on the lastest hardkernel minimal ubuntu image, systemd-analyse give me the following :
+
+    Startup finished in 2.647s (kernel) + 3.520s (userspace) = 6.167s
+    graphical.target reached after 3.478s in userspace
+
+To install it, copy uImage and dtb files to boot partition, and lib/modules to /lib on the odroid.
+
+See below for modified config regarding odroidc_defconfig.
+
+Disabled settings
+----------------
+- logo
+- 1wire
+- some filesystems : reiser, btrfs, fuse
+- quota (CONFIG_QFMT_V2)        
+- ipv6
+- memory ressource controller (CONFIG_MEMCG), 
+- bluetooth (CONFIG_BT_WAKE_CTRL, CONFIG_BACKPORT_BT) , 
+- raid and LVM support (CONFIG_MD) 
+- Slub debugm access to /sys/slab (CONFIG_SLUB_DEBUG)
+- auditing support (CONFIG_AUDIT)
+- syscall audit (CONFIG_AUDITSYSCALL)
+- security models (CONFIG_SECURITY)
+- security fs (CONFIG_SECURITYFS)
+- generate readable assembler (CONFIG_READABLE_ASM)
+- detect hard and soft lockup (CONFIG_LOCKUP_DETECTOR)
+- Collect scheduler debugging (CONFIG_SCHED_DEBUG)
+- verbose BUG() (CONFIG_DEBUG_BUGVERBOSE)
+- Compile the kernel with debug info (CONFIG_DEBUG_INFO)
+- video decoders
+- amlogic v4l support (CONFIG_V4L_AMLOGIC_VIDEO, CONFIG_V4L_AMLOGIC_VIDEO2)
+- i2c and drivers (CONFIG_I2C_AML,CONFIG_BMP085_I2C, CONFIG_SI1132, CONFIG_SI702X)
+- sensors support (CONFIG_SENSOR_DEVICES, CONFIG_MEDIA_RC_SUPPORT,CONFIG_I2C_MUX)
+- IR sensor (CONFIG_MESON_NEW_INPUT_REMOTE)
+- analog tv support (CONFIG_MEDIA_ANALOG_TV_SUPPORT
+- camera / video graber support (CONFIG_MEDIA_CAMERA_SUPPORT)
+- digital TV support (CONFIG_MEDIA_DIGITAL_TV_SUPPORT)
+- tun / tap (CONFIG_TUN)
+- debugfs for wlan (CONFIG_BACKPORT_CFG80211_DEBUGFS)
+- scheduler statistics (CONFIG_SCHEDSTATS)
+- timer stats (CONFIG_TIMER_STATS)
+- parralel port support (CONFIG_PRINTER)
+- tablets support (CONFIG_INPUT_TABLET)
+- ps/2 mouse support  (CONFIG_MOUSE_PS2)
+
+Changed settings
+----------------
+- automounter is in kernel and not as a module
+- cp437 codepage is in kernel and not as a module
+- Preemption model changed to CONFIG_PREEMPT_VOLUNTARY
+- gpio mem in kernel instead and not as a module (CONFIG_MESON_GPIOMEM)
+- joydev integrated in kernel and not as a module (CONFIG_INPUT_JOYDEV)
+
+added settings
+--------------
+- Optimize very unlikely/likely branches (CONFIG_JUMP_LABEL)
+- strip asm generated symbols (CONFIG_STRIP_ASM_SYMS)
+
+
+Below is the standard linux README
+==================================
+
         Linux kernel release 3.x <http://kernel.org/>
 
 These are the release notes for Linux version 3.  Read them carefully,
