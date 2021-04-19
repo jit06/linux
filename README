@@ -13,11 +13,12 @@ Using this kernel on the lastest hardkernel minimal ubuntu image, systemd-analys
 
 To install it, copy uImage and dtb files to boot partition, and lib/modules to /lib on the odroid.
 
-See below for modified config regarding odroidc_defconfig.
+See below for modified config regarding odroidc_defconfig. You can also use the config in the release packages.
+With this kernel, you are basicaly loosing bluetooth, hardware video acceleration (only used by kodi and c2play) and I2C. 
 
 Disabled settings
 ----------------
-- logo
+- linux logo (CONFIG_LOGO)
 - 1wire
 - some filesystems : reiser, btrfs, fuse
 - quota (CONFIG_QFMT_V2)        
@@ -50,6 +51,9 @@ Disabled settings
 - parralel port support (CONFIG_PRINTER)
 - tablets support (CONFIG_INPUT_TABLET)
 - ps/2 mouse support  (CONFIG_MOUSE_PS2)
+- TVIN
+- Ion video device support (CONFIG_AMLOGIC_IONVIDEO)
+- Ion memory management (CONFIG_AMLOGIC_ION CONFIG_ION)
 
 Changed settings
 ----------------
