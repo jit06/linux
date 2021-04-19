@@ -6,7 +6,7 @@ This is a linux kernel for Odroid C1 and C0, derived from hardkernel sources. I 
 The objective is to get a kernel for one or few dedicated task on the C1, like emulation or music player that do not require any security (no network connection)
 I have stripped down somes features either to : speedup boot, free memory or try to get a little performance boost.
 
-Using this kernel on the lastest hardkernel minimal ubuntu image, systemd-analyse give me the following :
+Using this kernel on the lastest hardkernel minimal ubuntu image, systemd-analyse give me the following (version with framebuffer console):
 
     Startup finished in 2.374s (kernel) + 2.977s (userspace) = 5.351s
     graphical.target reached after 2.926s in userspace
