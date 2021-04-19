@@ -8,8 +8,8 @@ I have stripped down somes features either to : speedup boot, free memory or try
 
 Using this kernel on the lastest hardkernel minimal ubuntu image, systemd-analyse give me the following :
 
-    Startup finished in 2.647s (kernel) + 3.520s (userspace) = 6.167s
-    graphical.target reached after 3.478s in userspace
+    Startup finished in 2.374s (kernel) + 2.977s (userspace) = 5.351s
+    graphical.target reached after 2.926s in userspace
 
 To install it, copy uImage and dtb files to boot partition, and lib/modules to /lib on the odroid.
 
